@@ -1,0 +1,246 @@
+Vocab: .
+    POJO: Plain Old Java Object
+    Java Beans: Simple objects with only getters and setters
+    Spring Beans: POJOs configured in the application context
+    DTO: Bean used to move state between layers
+
+Inversion of Control (IoC):
+    - IoC provides mechanism of dependency injection
+    - Application Context wraps the Bean Factory which servers
+        the beans at the runtime of the application
+    - Spring Boot provides auto-configuration of the Application
+        Context
+    - Container maintains your class dependencies
+    - Objects injected at runtime or startup time
+    - An object accepts the dependencies for construction
+        instead of constructing them
+
+Spring Boot Key Aspects:
+    - Embedded tomcat (or others)
+    - Auto-configuration of Application Context
+    - Automatic Servlet Mappings
+    - Database support and Hibernate/JPA dialect
+    - Automatic Controller Mappings
+
+Auto configuration
+    - Default opinionated configuration
+    - Easy to override defaults
+    - Configuration on presence
+
+Spring IoC
+    - Bean Factory
+    - Application Context (wrapper around the bean factory)
+    - References
+    - Analysis of construction order
+
+Annotations
+    - Native support in Java
+    - Metadata for your code
+    - Often used for compiler or runtime instructions
+        - @Test is an example
+    - Great leverage point for pointcuts
+
+Proxies
+    - Beans in Bean Factory are proxied
+    - Annotations drive proxies
+    - Annotations are easy extension points, for your
+        own abstracts too
+    - Method calling order matters
+
+Spring Data
+    - Provides a common set of interfaces
+    - Provides a common naming convention
+    - Provides aspected behavior
+    - Provides Repository and Data Mapping convention
+    Benefits
+        - Remove boilerplate code
+        - Allows for swapping datasources easier
+        - Allows to focus on business logic
+    Key Components
+        - Repository interface
+        - Entity Object
+        - DataSource
+
+Why use IoC
+    - Allows you to focus on contracts
+    - Develop business code only, leave construction to the container
+    - Build intermediate abstractions
+    - Produce clean code
+
+Spring and IoC
+    - IoC container is configured by developer
+    - Spring maintains handles to objects constructed at startup
+    - Spring serves singletons to classes during construction
+    - Spring maintains lifecycle of beans
+    - Developer only accesses the application context
+        not the raw bean factory
+
+Why build Service abstractions
+    - Encapsulate layers
+    - Abstract 3rd Party APIs
+    - Simplify implementations
+    - Swap out implementations as runtime
+
+How to Build a Service abstractions
+    - Define our interface (or class)
+    - Create the APIs
+    - Inject the dependencies
+    - Annotate or configure
+    - Code the implementation
+
+Model View Controller - MVC
+    - Fundamental pattern for web application development
+    - Model is the data
+    - View is the visual display that is populated
+    - Controller wires the view with the model
+
+Spring Controller
+    - Spring bean
+    - Annotated for the servlet Mapping
+    - Responds to incoming web requests
+    - Outputs a view or raw data
+
+Template Engines
+    - Spring supports several
+    - Thymeleaf most popular
+    - Provides a DSL for HTML leaving raw html documents
+    - Placeholders for dynamic data
+    - Rendering engine allows for final product
+
+RestController
+    - Spring uses controllers for ReSTful webservices
+    - Just another MVC, only our view is JSON
+    - Once you understand the paradigm, its straight forward
+    - Spring marshals JSON for you
+    - You can configure XML if desired
+
+Quizzes
+    - What is a benefit of the Auto Configuration preset in
+        Spring Boot?
+        - default opinionated configuration out of the box
+        - easy to override defaults
+        - configuration based on presence
+    - What is the proper term, from a Spring perspective,
+        for a class that has both methods and attributes?
+        - POJO
+            - A POJO is a Java Object that contains both attributes
+                and methods (not just getters and setters) that can
+                be used as a Spring Bean within the application
+                context
+    - In a skeleton spring boot app, which is not present no matter
+        the dependencies selected?
+        - index.html?
+            - index.html is not present no matter the dependencies
+                selected
+        - main method in class file?
+        - initial test class?
+        - pom.xml?
+    What is NOT a way to create a new application based on
+        Spring Boot?
+        - start.spring.io website?
+        - initializr.spring.io website?
+            - Not a website (use: start.spring.io)
+        - IDE plugins?
+        - Spring initializr webservice?
+    What is a key point of empahsis with inversion of control?
+        - The container creates and maintains dependencies
+            - IoC is a form of dependency injection where you allow
+                the container to create and maintain the dependencies
+                for your application
+    When working with proxies, what must be remembered when calling
+        methods in the same class as the calling method?
+        - Proxy behavior will not be applied
+            - Proxies are applied to public class interfaces, even
+                if an itnerface isn't defined, so direct method
+                invocation from within the class does not utilize
+                the proxy or its behavior
+    What configuration is needed to enable an embedded database?
+        - None, just having it on the classpath with no overrides
+            sufficient
+    What are some benefits of using Spring Data?
+        - provides aspected, or proxied behavior for data access
+        - provides a common set of interfaces
+        - utilizes a provided naming convention for methods
+    What interface must you implement for a spring data repository?
+        - None, you extend a repository interface
+            - To utilize spring data for repository behavior, you
+                simply need to extend and of the repository interfaces
+                for your database technology using generics
+    How is the IoC container configured with Spring?
+        - Component Scanning
+        - XML Configuration
+        - Java Configuration
+        - (any of these give mechanisms for devs to configure the
+            BeanFactory or IoC container)
+    What best describes the @Service annotation?
+        - a stereotype of @Component to enable component Scanning
+            - The @Service annotation is a stereotype of @Component
+                and is used for component scanning, but it also allows
+                you a point for your own service base aspects and proxies
+                if you desire.
+    Which of the following is a reason for building a service abstraction?
+        - Provide encapuslation of logical layers of code
+            - Logical encapsulation of code, be it code you write, third
+            party APIs, or different implementations, is a useful reason to
+            build a service abstraction.
+    Which is true about the @RequestMapping annotation?
+        - It defines the HTTP Verb the method responds to
+        - It defines the URL path the method or class responds to
+        - It can be additive from a URL perspective within a class on specific
+            methods
+
+Unit Testing
+    - Spring not needed
+    - Can inject framework mocks
+    - Simple strategy using Unit
+
+Controller Case
+    - ServletAPI Mocks
+    - ModelAndViewAssert
+    - What about MockMVC
+        - Spring considers this to be an integeration test
+
+Integration Testing
+    - To manage Spring IoC container caching between tests
+    - To provide Dependency Injection to test fixture instances
+    - To provide transaction management appropriate to integrationt
+        Testing
+    - To supply Spring-specific base calsses that assist devs
+        in writing integration tests
+
+Areas for Integration Tests support
+    - JDBC
+    - Annotations
+    - TestContext
+    - MockMVC
+
+What is Spring Security? (Frank P. Moley Spring: Spring Security Course)
+    - Filter based Authentication and Authorization framework
+    - Exploit prevention
+    - Robust Library Support
+
+Spring Frameworks
+    - SpEL
+    - AOP
+    - Transactions
+    - i18n
+    - Websockets
+    - Reactive Web
+    - JMS
+    - Tasks
+    - Caching
+
+Spring Boot Frameworks
+    - Actuator (Frank P. Moley Spring Boot: Essential Training Course)
+    - Logging
+    - CLI for building apps
+
+Additional Projects
+    - AMQP
+    - Batch
+    - Cloud (Frank P. Moley Spring: Spring Cloud course)
+    - GraphQL
+    - Session
+    - Integration
+    - Shell
+
